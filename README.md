@@ -52,7 +52,7 @@ URL(string: "http://api/website.com").callCodable { (myStruct: MyStruct?) in
 ```
 `URLRequest` conforms to `Callable` as well, so you can do the same thing: 
 
-```
+```swift
 import Callable
 
 let myURLRequest: URLRequest!
