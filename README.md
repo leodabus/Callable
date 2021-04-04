@@ -1,20 +1,25 @@
 # Callable
-A light weight Swift Package for making web calls
-
-
-# Product Name
-> Short blurb about what your product does.
+> A light weight Swift Package for making web calls.
 
 [![Swift Version][swift-image]][swift-url]
-[![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
-[![codebeat-badge][codebeat-image]][codebeat-url]
 
-One to two paragraph statement about your product and what it does.
+Callable was created to solve the tiresome and tedius chore of writing `URLSession.shared.dataTask` etc. etc. etc.
 
-![](header.png)
+## Installation into a project
 
-## Installation
+Copy the `.git` url for this repo.
+
+<img width="201" alt="Screen Shot 2021-04-03 at 10 11 14 PM" src="https://user-images.githubusercontent.com/4231144/113499279-85428a80-94c9-11eb-996d-4683db42b36d.png">
+<img width="560" alt="Screen Shot 2021-04-03 at 10 11 31 PM" src="https://user-images.githubusercontent.com/4231144/113499283-8f648900-94c9-11eb-925e-9a984fac0979.png">
+
+Paste it here: 
+<img width="426" alt="Screen Shot 2021-04-03 at 10 12 07 PM" src="https://user-images.githubusercontent.com/4231144/113499290-a4d9b300-94c9-11eb-908c-0a0b1c76a33f.png">
+
+Click enter, then follow the prompts. 
+
+
+## Installation into a package
 
 Add this project on your `Package.swift`
 
@@ -30,49 +35,37 @@ let package = Package(
 
 ## Usage example
 
+You can simply specify your `URL` and then access either `Data`, `JSON` or through the magic of generics: a `Codable` type.  
 
 ```swift
-import Project
-let proj = Class(param: String?)
-proj.run()
+import Callable
+
+URL(string: "http://api/website.com").callCodable { (myStruct: MyStruct?) in 
+    print("The data", (myStruct == nil ? "doesn't convert": "converts"), "into MyStruct.")
+}
+
+```
+`URLRequest` conforms to `Callable` as well, so you can do the same thing: 
+
+```
+import Callable
+
+myURLRequest.callCodable { (myStruct: MyStruct?) in 
+    print("The data", (myStruct == nil ? "doesn't convert": "converts"), "into MyStruct.")
+}
 ```
 
-
-## Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
-```sh
-make install
-```
-
-## Release History
-
-* 0.2.1
-    * CHANGE: Update docs (module code remains unchanged)
-* 0.2.0
-    * CHANGE: Remove `setDefaultXYZ()`
-    * ADD: Add `init()`
-* 0.1.1
-    * FIX: Crash when calling `baz()` (Thanks @GenerousContributorName!)
-* 0.1.0
-    * The first proper release
-    * CHANGE: Rename `foo()` to `bar()`
-* 0.0.1
-    * Work in progress
 
 ## Meta
 
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
+Scott Lydon – 
+[Linkedin](https://www.linkedin.com/in/scottlydon/)
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+Distributed under the MIT license. See ``LICENSE`` for more information.
 
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+[ElevatedUnderdogs](https://github.com/orgs/ElevatedUnderdogs/dashboard)
 
 [swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[codebeat-image]: https://codebeat.co/badges/c19b47ea-2f9d-45df-8458-b2d952fe9dad
