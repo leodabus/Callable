@@ -8,12 +8,17 @@ Callable was created to solve the tiresome and tedius chore of writing `URLSessi
 
 ## Installation into a project
 
-Copy the `.git` url for this repo.
+[Copy the `.git` url for this repo.](https://github.com/ElevatedUnderdogs/Callable.git)
+
 
 <img width="201" alt="Screen Shot 2021-04-03 at 10 11 14 PM" src="https://user-images.githubusercontent.com/4231144/113499279-85428a80-94c9-11eb-996d-4683db42b36d.png">
+
+
 <img width="560" alt="Screen Shot 2021-04-03 at 10 11 31 PM" src="https://user-images.githubusercontent.com/4231144/113499283-8f648900-94c9-11eb-925e-9a984fac0979.png">
 
 Paste it here: 
+
+
 <img width="426" alt="Screen Shot 2021-04-03 at 10 12 07 PM" src="https://user-images.githubusercontent.com/4231144/113499290-a4d9b300-94c9-11eb-908c-0a0b1c76a33f.png">
 
 Click enter, then follow the prompts. 
