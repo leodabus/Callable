@@ -14,7 +14,7 @@ Callable was created to solve the tiresome and tedius chore of writing `URLSessi
 <img width="201" alt="Screen Shot 2021-04-03 at 10 11 14 PM" src="https://user-images.githubusercontent.com/4231144/113499279-85428a80-94c9-11eb-996d-4683db42b36d.png">
 
 
-<img width="560" alt="Screen Shot 2021-04-03 at 10 11 31 PM" src="https://user-images.githubusercontent.com/4231144/113499283-8f648900-94c9-11eb-925e-9a984fac0979.png">
+<img width="201" alt="Screen Shot 2021-04-03 at 10 11 31 PM" src="https://user-images.githubusercontent.com/4231144/113499283-8f648900-94c9-11eb-925e-9a984fac0979.png">
 
 Paste it here: 
 
