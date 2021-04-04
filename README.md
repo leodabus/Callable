@@ -55,6 +55,7 @@ URL(string: "http://api/website.com").callCodable { (myStruct: MyStruct?) in
 ```
 import Callable
 
+let myURLRequest: URLRequest!
 myURLRequest.callCodable { (myStruct: MyStruct?) in 
     print("The data", (myStruct == nil ? "doesn't convert": "converts"), "into MyStruct.")
 }
