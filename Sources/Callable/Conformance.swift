@@ -19,6 +19,10 @@ extension URL {
     public func callLocalCodable<T: Codable>(expressive: Bool = false, _ action: (T?)->Void) throws {
         action(try Data(contentsOf: self, options: .mappedIfSafe).codable())
     }
+
+    public func localCodable<T: Codable>() throws -> T? {
+        try Data(contentsOf: self, options: .mappedIfSafe).codable()
+    }
 }
 
 extension URLRequest: Callable {
