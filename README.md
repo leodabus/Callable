@@ -33,7 +33,7 @@ import PackageDescription
 
 let package = Package(
     dependencies: [
-        .Package(url: "https://github.com/user/project.git", majorVersion: 0, minor: 0)
+        .Package(url: "https://github.com/ElevatedUnderdogs/Callable.git", majorVersion: 0, minor: 0)
     ]
 )
 ```
