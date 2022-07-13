@@ -18,12 +18,14 @@ public typealias DownloadCompletion = (URL?, URLResponse?, Error?) -> Void
 
 extension URL: ProvidesSessionDownloadDataTask {
     
-    public func session(_ downloadCompletion: @escaping DownloadCompletion) -> URLSessionDownloadTask {
-        URLSession.shared.downloadTask(with: self, completionHandler: downloadCompletion)
+    /// attempts to get data from a Callable resource
+    /// - Parameter dataAction: access the data here.  Passes nil if could not get the data.
+    public func getDownloadData(_ dataAction: DataAction? = nil) {
+        sessionDownloadTask(provideData: dataAction).resume()
     }
     
     private func sessionDownloadTask(provideData: DataAction?) -> URLSessionDownloadTask {
-        session { url, response, error in
+        URLSession.shared.downloadTask(with: self) { url, response, error in
             guard let data = url?.data else {
                 errorPrint()
                 provideData?("error: \(error?.localizedDescription ?? "nil")".data(using: .utf8)!)
@@ -31,6 +33,10 @@ extension URL: ProvidesSessionDownloadDataTask {
             }
             provideData?(data)
         }
+    }
+    
+    public func session(_ downloadCompletion: @escaping DownloadCompletion) -> URLSessionDownloadTask {
+        URLSession.shared.downloadTask(with: self, completionHandler: downloadCompletion)
     }
     
     private func errorPrint() {

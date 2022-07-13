@@ -84,10 +84,7 @@ extension ProvidesSessionDataTask where Self: HasAbsoluteString {
         provideJSON: DictionaryAction?,
         errorHandler: @escaping ErrorHandler
     ) -> URLSessionDataTask {
-        let url: URL = URL(string: "")!
-        print(ur)
-    
-        return session {
+        session {
             data, response, error in
             guard let data = data else {
                 errorPrint()
