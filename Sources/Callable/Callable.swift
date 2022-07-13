@@ -1,15 +1,20 @@
-
-
 import Foundation
 
+public typealias Callable = ProvidesSessionDataTask & HasAbsoluteString
 
-public protocol Callable {
-
+public protocol ProvidesSessionDataTask {
     func session(_ promiseAction: @escaping PromiseAction) -> URLSessionDataTask
+}
+
+public protocol HasAbsoluteString {
     var absoluteString: String { get }
 }
 
-extension Callable {
+public protocol ProvidesSessionDownloadDataTask {
+    func session(_ downloadCompletion: @escaping DownloadCompletion) -> URLSessionDownloadTask
+}
+
+extension ProvidesSessionDataTask where Self: HasAbsoluteString {
 
     /// attempts to get data from a Callable resource
     /// - Parameter dataAction: access the data here.  Passes nil if could not get the data.
@@ -48,6 +53,7 @@ extension Callable {
     }
 
 
+
     private func sessionDataTask(expressive: Bool = false, provideData: DataAction?) -> URLSessionDataTask {
         session { data, response, error in
             guard let data = data else {
@@ -78,7 +84,10 @@ extension Callable {
         provideJSON: DictionaryAction?,
         errorHandler: @escaping ErrorHandler
     ) -> URLSessionDataTask {
-        session {
+        let url: URL = URL(string: "")!
+        print(ur)
+    
+        return session {
             data, response, error in
             guard let data = data else {
                 errorPrint()
