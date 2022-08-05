@@ -22,6 +22,12 @@ extension ProvidesSessionDataTask where Self: HasAbsoluteString {
         sessionDataTask(provideData: dataAction).resume()
     }
 
+    /// attempts to get data from a Callable resource
+    /// - Parameter dataAction: access the data here.  Passes nil if could not get the data.
+    public func getDataError(_ dataAction: DataAction? = nil, errorHandler: ErrorHandler? = nil) {
+        sessionDataTaskError(provideData: dataAction, errorHandler: errorHandler).resume()
+    }
+
     /// Attempts to get JSON from a callable resource
     /// - Parameter jsonAction: access the JSON here.  Passes nil if could not get JSON.
     public func callJSON(_ jsonAction: DictionaryAction? = nil) {
@@ -43,6 +49,24 @@ extension ProvidesSessionDataTask where Self: HasAbsoluteString {
         }
     }
 
+    /// Attempts to get a codable instance from a callable resource
+    /// - Parameters:
+    ///   - expressive: If you would like debug information set expressive to true.
+    ///   - action: access the codable resource here.  Passes nil if could not get the codable resource.
+    ///   - errorHandler: provided to handle networking errors. 
+    public func callCodableError<T: Codable>(
+        expressive: Bool = false,
+        action: @escaping (T?)->Void,
+        errorHandler: ErrorHandler? = nil
+    ) {
+        getDataError({ data in
+            if expressive && T(data) == nil {
+                print("failed: ", data, data.jsonDictionary )
+            }
+            action(T(data))
+        }, errorHandler: errorHandler)
+    }
+
     /// Attempts to get either one or another codable instance from a callable resource.
     /// - Parameter action: If the `First` instance is not nil then the `Second` Type will be nil and vice versa.
     ///        If neither could be converted from the data, then both will be nil.
@@ -56,6 +80,24 @@ extension ProvidesSessionDataTask where Self: HasAbsoluteString {
 
     private func sessionDataTask(expressive: Bool = false, provideData: DataAction?) -> URLSessionDataTask {
         session { data, response, error in
+            guard let data = data else {
+                errorPrint()
+                provideData?("error: \(error?.localizedDescription ?? "nil")".data(using: .utf8)!)
+                return
+            }
+            provideData?(data)
+        }
+    }
+
+    private func sessionDataTaskError(
+        expressive: Bool = false,
+        provideData: DataAction?,
+        errorHandler: ErrorHandler?
+    ) -> URLSessionDataTask {
+        session { data, response, error in
+            if let error = error {
+                errorHandler?(error)
+            }
             guard let data = data else {
                 errorPrint()
                 provideData?("error: \(error?.localizedDescription ?? "nil")".data(using: .utf8)!)
