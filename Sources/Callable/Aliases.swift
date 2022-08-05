@@ -12,3 +12,4 @@ public typealias PromiseAction = (Data?, URLResponse?, Error?) -> Void
 public typealias DictionaryAction = ([String: Any]) -> Void
 public typealias StringAction = (String) -> Void
 public typealias ErrorHandler = (Error) -> Void
+public typealias AnyHandler = (Any) -> Void
