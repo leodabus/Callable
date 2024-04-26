@@ -28,6 +28,12 @@ extension ProvidesSessionDataTask where Self: HasAbsoluteString {
         sessionDataTaskError(provideData: dataAction, errorHandler: errorHandler).resume()
     }
 
+    /// attempts to get data from a Callable resource
+    /// - Parameter dataAction: access the data here.  Passes nil if could not get the data.
+    public func getDataErrorTask(_ dataAction: DataAction? = nil, errorHandler: ErrorHandler? = nil) -> URLSessionDataTask {
+        sessionDataTaskError(provideData: dataAction, errorHandler: errorHandler)
+    }
+
     /// Attempts to get JSON from a callable resource
     /// - Parameter jsonAction: access the JSON here.  Passes nil if could not get JSON.
     public func callJSON(_ jsonAction: DictionaryAction? = nil) {
@@ -60,6 +66,19 @@ extension ProvidesSessionDataTask where Self: HasAbsoluteString {
         errorHandler: ErrorHandler? = nil
     ) {
         getDataError({ data in
+            if expressive && T(data) == nil {
+                print("failed: ", data, data.jsonDictionary )
+            }
+            action(T(data))
+        }, errorHandler: errorHandler)
+    }
+
+    public func callCodableErrorTask<T: Codable>(
+        expressive: Bool = false,
+        action: @escaping (T?)->Void,
+        errorHandler: ErrorHandler? = nil
+    ) -> URLSessionDataTask {
+        getDataErrorTask({ data in
             if expressive && T(data) == nil {
                 print("failed: ", data, data.jsonDictionary )
             }
