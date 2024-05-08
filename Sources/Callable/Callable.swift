@@ -48,10 +48,13 @@ extension ProvidesSessionDataTask where Self: HasAbsoluteString {
     ///   - action: access the codable resource here.  Passes nil if could not get the codable resource.
     public func callCodable<T: Codable>(expressive: Bool = false, _ action: @escaping (T?)->Void) {
         getData { data in
-            if expressive && T(data) == nil {
+            if T.self == Data.self, let t = data as? T {
+                action(t)
+            } else if let t = T(data) {
+                action(t)
+            } else if expressive {
                 print("failed: ", data, data.jsonDictionary )
             }
-            action(T(data))
         }
     }
 
@@ -66,10 +69,13 @@ extension ProvidesSessionDataTask where Self: HasAbsoluteString {
         errorHandler: ErrorHandler? = nil
     ) {
         getDataError({ data in
-            if expressive && T(data) == nil {
+            if T.self == Data.self, let t = data as? T {
+                action(t)
+            } else if let t = T(data) {
+                action(t)
+            } else if expressive {
                 print("failed: ", data, data.jsonDictionary )
             }
-            action(T(data))
         }, errorHandler: errorHandler)
     }
 
@@ -79,10 +85,13 @@ extension ProvidesSessionDataTask where Self: HasAbsoluteString {
         errorHandler: ErrorHandler? = nil
     ) -> URLSessionDataTask {
         getDataErrorTask({ data in
-            if expressive && T(data) == nil {
+            if T.self == Data.self, let t = data as? T {
+                action(t)
+            } else if let t = T(data) {
+                action(t)
+            } else if expressive {
                 print("failed: ", data, data.jsonDictionary )
             }
-            action(T(data))
         }, errorHandler: errorHandler)
     }
 
