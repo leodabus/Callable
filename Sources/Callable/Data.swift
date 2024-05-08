@@ -18,7 +18,10 @@ extension Data {
     }
 
     public func decodedObject<T: Decodable>(using decoder: JSONDecoder = JSONDecoder()) throws -> T {
-        try decoder.decode(T.self, from: self)
+        if T.self == Data.self, let data = self as? T {
+            return data
+        }
+        return try JSONDecoder().decode(T.self, from: self)
     }
 
     func codable<T: Codable>() -> T? {
