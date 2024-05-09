@@ -1,5 +1,8 @@
 import XCTest
 @testable import Callable
+#if canImport(Vapor)
+import Vapor
+#endif
 
 final class CallableTests: XCTestCase {
 

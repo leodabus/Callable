@@ -11,6 +11,9 @@
 //   let aPIs = try? newJSONDecoder().decode(APIs.self, from: jsonData)
 
 import Foundation
+#if canImport(Vapor)
+import Vapor
+#endif
 
 // MARK: - APIs
 struct APIs: Codable {

@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(Vapor)
+import Vapor
+#endif
 
 public struct GenericError: Error {
     public var text: String

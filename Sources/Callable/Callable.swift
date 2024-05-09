@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(Vapor)
+import Vapor
+#endif
 
 public typealias Callable = ProvidesSessionDataTask & HasAbsoluteString
 

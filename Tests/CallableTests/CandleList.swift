@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(Vapor)
+import Vapor
+#endif
 
 // MARK: - CandlesList
 struct CandlesList: Codable {
