@@ -1,7 +1,7 @@
 import XCTest
 @testable import Callable
-#if canImport(Vapor)
-import Vapor
+#if canImport(FoundationNetworking)
+import FoundationNetworking
 #endif
 
 final class CallableTests: XCTestCase {

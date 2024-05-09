@@ -6,8 +6,8 @@
 //
 
 import Foundation
-#if canImport(Vapor)
-import Vapor
+#if canImport(FoundationNetworking)
+import FoundationNetworking
 #endif
 
 public struct GenericError: Error {

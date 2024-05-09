@@ -1,6 +1,6 @@
 import XCTest
-#if canImport(Vapor)
-import Vapor
+#if canImport(FoundationNetworking)
+import FoundationNetworking
 #endif
 
 #if !canImport(ObjectiveC)

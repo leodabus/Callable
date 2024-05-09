@@ -11,8 +11,8 @@
 //   let aPIs = try? newJSONDecoder().decode(APIs.self, from: jsonData)
 
 import Foundation
-#if canImport(Vapor)
-import Vapor
+#if canImport(FoundationNetworking)
+import FoundationNetworking
 #endif
 
 // MARK: - APIs
